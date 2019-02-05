@@ -154,8 +154,12 @@ class DatePicker extends Component {
 
   getDateStr(date = this.props.date) {
     const { mode, is24Hour } = this.props;
-    let format = FORMATS[mode];
-    if (mode == "time" && is24Hour) format = FORMATS["time24"];
+    let { format } = this.props;
+    if (!format) {
+      format = FORMATS[mode];
+      if (mode == "time" && is24Hour) 
+        format = FORMATS["time24"];
+    }
 
     const dateInstance = date instanceof Date ? date : this.getDate(date);
 
